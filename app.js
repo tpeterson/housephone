@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const crypto = require('crypto');
 const request = require('request');
+const url = require('url');
 
 const getRepByZip = require('./my_modules/get_repByZip');
 
@@ -154,7 +155,7 @@ function sendRepInfo(recipientId, repObj) {
             {
               type: 'web_url',
               url: repObj.website,
-              title: repObj.website
+              title: url.parse(repObj.website).hostname
             },
             {
               type: 'phone_number',
