@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const crypto = require('crypto');
 const request = require('request');
 
+const getRepByZip = require('./my_modules/get_repByZip');
+
 const VALIDATION_TOKEN = process.env.VERIFY_TOKEN;
 const PAGE_TOKEN = process.env.PAGE_TOKEN;
 const APP_SECRET = process.env.APP_SECRET;
@@ -99,7 +101,15 @@ function receivedMessage(event) {
     switch (text) {
       default:
         // WILL REPLACE WITH WIT.RUNACTIONS
-        sendTextMessage(sender, 'Hi, I\'m still getting set up.');
+        const text_to_num =  parseInt(text, 10);
+        if (typeof text_to_num === 'number') {
+          getRepByZip(text).then((res)=>{
+            sendTextMessage(sender, res);
+          });
+        } else {
+          sendTextMessage(sender, 'Hi, I\'m still getting set up.');
+        }
+        //sendTextMessage(sender, 'Hi, I\'m still getting set up.');
     }
   } else if (attachments) {
     sendTextMessage(sender, 'I can\'t handle attachments yet.');
