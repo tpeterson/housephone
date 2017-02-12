@@ -104,7 +104,7 @@ function receivedMessage(event) {
         const text_to_num =  parseInt(text, 10);
         if (!isNaN(text_to_num)) {
           getRepByZip(text).then((res)=>{
-            sendTextMessage(sender, res[0].phone);
+            sendRepInfo(sender, res[0]);
           }).catch((err) => {
             sendTextMessage(sender, err);
           });
@@ -125,6 +125,33 @@ function sendTextMessage(recipientId, messageText) {
     },
     message: {
       text: messageText
+    }
+  };
+
+  // Pass message object to send function
+  callSendAPI(messageData);
+}
+function sendRepInfo(recipientId, messageText) {
+  // Add recipient and message text to message object
+  let messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      attachment: {
+        type: 'template',
+        payload: {
+          template_type: 'button',
+          text: `Rep. ${messageText.firstName} ${messageText.lastName}`,
+          buttons: [
+            {
+              type: 'phone_number',
+              title: `Call ${messageText.phone}`,
+              payload: `+1${messageText.phone.replace(/\-/g, '')}`
+            }
+          ]
+        }
+      }
     }
   };
 
