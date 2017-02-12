@@ -104,9 +104,9 @@ function receivedMessage(event) {
         const text_to_num =  parseInt(text, 10);
         if (typeof text_to_num === 'number') {
           getRepByZip(text).then((res)=>{
-            sendTextMessage(sender, res);
+            sendTextMessage(sender, res[0].phone);
           }).catch((err) => {
-            sendTextMessage(sender, text_to_num);
+            sendTextMessage(sender, text);
           });
         } else {
           sendTextMessage(sender, 'Hi, I\'m still getting set up.');
