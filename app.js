@@ -111,7 +111,7 @@ function receivedMessage(event) {
               });
             } else {
               sendRepInfo(sender, res[0]);
-            }  
+            }
           }).catch((err) => {
             sendTextMessage(sender, err);
           });
@@ -138,7 +138,7 @@ function sendTextMessage(recipientId, messageText) {
   // Pass message object to send function
   callSendAPI(messageData);
 }
-function sendRepInfo(recipientId, messageText) {
+function sendRepInfo(recipientId, repObj) {
   // Add recipient and message text to message object
   let messageData = {
     recipient: {
@@ -149,12 +149,17 @@ function sendRepInfo(recipientId, messageText) {
         type: 'template',
         payload: {
           template_type: 'button',
-          text: `Rep. ${messageText.firstName} ${messageText.lastName}`,
+          text: `Rep. ${repObj.firstName} ${repObj.lastName} (${repObj.party})`,
           buttons: [
             {
+              type: 'web_url',
+              url: repObj.website,
+              title: repObj.website
+            },
+            {
               type: 'phone_number',
-              title: `Call ${messageText.phone}`,
-              payload: `+1${messageText.phone.replace(/\-/g, '')}`
+              title: `Call ${repObj.phone}`,
+              payload: `+1${repObj.phone.replace(/\-/g, '')}`
             }
           ]
         }
