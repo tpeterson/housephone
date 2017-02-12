@@ -102,16 +102,15 @@ function receivedMessage(event) {
       default:
         // WILL REPLACE WITH WIT.RUNACTIONS
         const text_to_num =  parseInt(text, 10);
-        if (text_to_num !== 'NaN') {
+        if (text_to_num !== NaN) {
           getRepByZip(text).then((res)=>{
             sendTextMessage(sender, res[0].phone);
           }).catch((err) => {
             sendTextMessage(sender, err);
           });
         } else {
-          sendTextMessage(sender, 'Hi, I\'m still getting set up.');
+          sendTextMessage(sender, 'Type in your zip code, and I\'ll look up your representatives\' info.');
         }
-        //sendTextMessage(sender, 'Hi, I\'m still getting set up.');
     }
   } else if (attachments) {
     sendTextMessage(sender, 'I can\'t handle attachments yet.');
