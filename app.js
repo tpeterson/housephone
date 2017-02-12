@@ -102,11 +102,11 @@ function receivedMessage(event) {
       default:
         // WILL REPLACE WITH WIT.RUNACTIONS
         const text_to_num =  parseInt(text, 10);
-        if (typeof text_to_num === 'number') {
+        if (text_to_num !== 'NaN') {
           getRepByZip(text).then((res)=>{
             sendTextMessage(sender, res[0].phone);
           }).catch((err) => {
-            sendTextMessage(sender, text);
+            sendTextMessage(sender, err);
           });
         } else {
           sendTextMessage(sender, 'Hi, I\'m still getting set up.');
