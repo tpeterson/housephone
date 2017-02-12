@@ -105,6 +105,8 @@ function receivedMessage(event) {
         if (typeof text_to_num === 'number') {
           getRepByZip(text).then((res)=>{
             sendTextMessage(sender, res);
+          }).catch((err) => {
+            sendTextMessage(sender, text_to_num);
           });
         } else {
           sendTextMessage(sender, 'Hi, I\'m still getting set up.');
