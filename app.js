@@ -106,7 +106,7 @@ function receivedMessage(event) {
         if (!isNaN(text_to_num)) {
           getRepByZip(text).then((res)=>{
             if (res.length > 1) {
-              sendTextMessage(sender, 'You have more than 1 possible representative.');
+              sendTextMessage(sender, `You have ${res.length} possible representatives.`);
               res.forEach((rep)=>{
                 sendRepInfo(sender, rep);
               });
