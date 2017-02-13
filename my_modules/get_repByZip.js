@@ -8,7 +8,7 @@ function getRepByZip(zip) {
   // }));
   return new Promise(function(resolve, reject) {
     const zip_num = parseInt(zip, 10);
-    const zip_toQuery = ((typeof zip_num === 'number') && (zip_num.toString().length === 5)) ?  zip_num : reject('Please enter a 5-digit zip code.');
+    const zip_toQuery = ((typeof zip_num === 'number') && (zip.length === 5)) ?  zip_num : reject('Please enter a 5-digit zip code.');
     findLocalRep(zip_toQuery)
       .then((res) => {
         const repObjects = res.map((rep) => {
