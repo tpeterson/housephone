@@ -3,9 +3,6 @@ const lookUpRep = require('./get_repFromList');
 const listOfReps = require('./list_repsFull');
 
 function getRepByZip(zip) {
-  // const listOfReps = JSON.parse(fs.readFileSync('./list_repsFull.json', {
-  //   encoding: 'utf8'
-  // }));
   return new Promise(function(resolve, reject) {
     const zip_num = parseInt(zip, 10);
     const zip_toQuery = ((typeof zip_num === 'number') && (zip.length === 5)) ?  zip : reject('Please enter a 5-digit zip code.');
