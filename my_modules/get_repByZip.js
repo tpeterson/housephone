@@ -19,7 +19,10 @@ function getRepByZip(zip) {
           reject('I couldn\'t find any representatives for that zip code.');
         }
       })
-      .catch((err) => reject(err));
+      .catch((err) => {
+        console.log(`Problem caught in findLocalRep: ${err}`);
+        reject(err);
+      });
   });
 }
 

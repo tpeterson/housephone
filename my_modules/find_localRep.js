@@ -21,7 +21,8 @@ function findLocalRep(zip_code) {
 
     const req = http.request(options, (res) => {
       if (res.statusCode !== 200) {
-        reject(`Problem with findLocalRep response: ${res.statusCode}`);
+        console.log(`Problem caught in findLocalRep response: ${res.statusCode}`);
+        reject('Sorry, I\'m unable to look up representatives by zip code right now.');
       }
 
       let data = new Buffer(0);
@@ -36,7 +37,8 @@ function findLocalRep(zip_code) {
     });
 
     req.on('error', (e) => {
-      reject(`Problem with findLocalRep request: ${e.message}`);
+      console.log(`Problem caught in findLocalRep request: ${e.message}`)
+      reject('Sorry, I\'m unable to look up representatives by zip code right now.');
     });
 
     req.write(postData);

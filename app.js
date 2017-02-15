@@ -21,9 +21,8 @@ function verifyRequestSignature(req, res, buf) {
   var signature = req.headers["x-hub-signature"];
 
   if (!signature) {
-    // For testing, let's log an error. In production, you should throw an
-    // error.
     console.error('Couldn\'t validate the signature.');
+    throw new Error('No request signature.');
   } else {
     let elements = signature.split('=');
     let method = elements[0];
@@ -83,10 +82,6 @@ app.post('/webhook', function postWebhook(req, res) {
 function receivedMessage(event) {
   // Retrieve Facebook user ID of sender
   const sender = event.sender.id;
-
-  // Retrieve session info if existing user or create new session
-  //const sessionId = findOrCreateSession(sender);
-
   const timeOfMessage = event.timestamp;
 
   // Retrieve message content
@@ -101,7 +96,6 @@ function receivedMessage(event) {
     // Check content of text message
     switch (text) {
       default:
-        // WILL REPLACE WITH WIT.RUNACTIONS
         const text_to_num =  parseInt(text, 10);
         if (!isNaN(text_to_num)) {
           getRepByZip(text).then((res)=>{
