@@ -1101,7 +1101,7 @@ module.exports = [
   {
     "state": "Connecticut",
     "district": "4",
-    "firstName": "Jim",
+    "firstName": "James A.",
     "lastName": "Himes",
     "party": "D",
     "phone": "202-225-5541",
@@ -3419,7 +3419,7 @@ module.exports = [
     "state": "New York",
     "district": "7",
     "firstName": "Nydia M.",
-    "lastName": "Velázquez",
+    "lastName": "Velazquez",
     "party": "D",
     "phone": "202-225-2361",
     "website": "https://velazquez.house.gov",
@@ -3471,8 +3471,8 @@ module.exports = [
   {
     "state": "New York",
     "district": "11",
-    "firstName": "Daniel",
-    "lastName": "Donovan",
+    "firstName": "Daniel M.",
+    "lastName": "Donovan Jr.",
     "party": "R",
     "phone": "202-225-3371",
     "website": "https://donovan.house.gov/",
