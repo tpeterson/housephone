@@ -46,7 +46,6 @@ app.get('/', function getIndex(req, res) {
 app.get('/webhook', function getWebhook(req, res) {
   if (req.query['hub.mode'] === 'subscribe' &&
     req.query['hub.verify_token'] === VALIDATION_TOKEN) {
-    console.log('Validating webhook');
     res.status(200).send(req.query['hub.challenge']);
   } else {
     console.error('Failed validation. Make sure the validation tokens match.');
@@ -89,8 +88,6 @@ function receivedMessage(event) {
     text,
     attachments
   } = event.message;
-
-  console.log(`Received message from user ${sender} at ${timeOfMessage} with message: ${JSON.stringify(text)}`);
 
   if (text) {
     // Check content of text message
@@ -180,8 +177,6 @@ function callSendAPI(messageData) {
     if (!error && response.statusCode === 200) {
       let recipientId = body.recipient_id;
       let messageId = body.message_id;
-
-      console.log(`Successfully sent message with ID ${messageId} to recipient ${recipientId}`);
     } else {
       console.error('Unable to send message.');
       console.error(response);

@@ -13,6 +13,10 @@ function getRepByZip(zip) {
           return repObj;
         });
 
+        if (repObjects.includes(undefined)) {
+          console.log(`Zip code ${zip} returns an undefined representative.`);
+        }
+
         if (repObjects.length > 0) {
           resolve(repObjects);
         } else {

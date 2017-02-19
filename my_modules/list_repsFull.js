@@ -1852,7 +1852,7 @@ module.exports = [
   {
     "state": "Illinois",
     "district": "9",
-    "firstName": "Jan",
+    "firstName": "Janice",
     "lastName": "Schakowsky",
     "party": "D",
     "phone": "202-225-2111",

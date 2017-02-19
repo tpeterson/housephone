@@ -1,13 +1,28 @@
 function lookUpRep(rep_name, listOfReps) {
-  const rep_nameArr = rep_name.trim().split(' ');
-  const rep_firstName = rep_nameArr[0];
-  const rep_lastName = rep_nameArr[rep_nameArr.length - 1];
-
   const foundRep = listOfReps.filter((repObj) => {
-    const repObj_fullName = repObj.firstName + ' ' + repObj.lastName;
-    return (repObj.firstName.includes(rep_firstName) && (repObj.lastName === rep_lastName)) || (repObj_fullName === rep_name.trim());
+    const searchRep = rep_name.trim();
+    const listRep = repObj.firstName + ' ' + repObj.lastName;
+
+    return checkIfNamesMatch(searchRep, listRep);
   });
   return foundRep[0];
+}
+
+function checkIfNamesMatch(nameOne, nameTwo) {
+  let name1 = nameOne.split(' ');
+  let name2 = nameTwo.split(' ');
+
+  if (name1.length === name2.length) {
+    return name1.join(' ') === name2.join(' ');
+  } else if (name1.length > name2.length) {
+    return name2.every((word) => {
+      return name1.includes(word);
+    });
+  } else if (name2.length > name1.length) {
+    return name1.every((word) => {
+      return name2.includes(word);
+    });
+  }
 }
 
 module.exports = lookUpRep;
